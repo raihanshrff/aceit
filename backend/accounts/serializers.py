@@ -20,3 +20,18 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     def create(self,validated_data):
         return User.objects.create_user(**validated_data)
+
+# PROFILE Serializer
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = [
+            "id",
+            "username",
+            "email",
+            "full_name",
+            "role",
+            "experience_level",
+            "subscription_plan",
+            "created_at",
+        ]
