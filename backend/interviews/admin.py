@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Interview
+from .models import Interview, Question
 # Register your models here.
 
 admin.site.register(Interview)
+admin.site.register(Question)

@@ -3,8 +3,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
-
-from .serializers import InterviewSerializer
+from .models import Interview,Question
+from .serializers import InterviewSerializer, QuestionSerializer
 # Create your views here.
 
 class InterviewCreateView(APIView):
@@ -21,3 +21,15 @@ class InterviewCreateView(APIView):
             serializer.errors,
             status=status.HTTP_400_BAD_REQUEST
         )
+class QuestionCreateView(APIView):
+    permission_classes = [IsAuthenticated]
+    def get(self,request,interview_id):
+        questions = Question.objects.filter(
+            interview_id = interview_id
+        ).order_by("question_number")
+
+        serializer = QuestionSerializer(
+            questions,
+            many=True
+        )
+        return Response(serializer.data)

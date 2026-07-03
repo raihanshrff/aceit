@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Interview
+from .models import Interview,Question
 
 class InterviewSerializer(serializers.ModelSerializer):
     class Meta:
@@ -18,4 +18,14 @@ class InterviewSerializer(serializers.ModelSerializer):
             "status",
             "score",
             "created_at",
+        ]
+
+# question serializer
+
+class QuestionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Question
+        fields = [
+            "question_number",
+            "question_text",
         ]

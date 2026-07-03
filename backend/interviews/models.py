@@ -55,3 +55,22 @@ class Interview(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.role}"
+
+# question model 
+class Question(models.Model):
+    interview = models.ForeignKey(
+        Interview,
+        on_delete=models.CASCADE,
+        related_name="questions"
+    )
+
+    question_number = models.IntegerField()
+
+    question_text = models.TextField()
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    def __str__(self):
+        return f"Question {self.question_number} - {self.interview.user.username}"

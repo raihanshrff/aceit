@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import InterviewCreateView
+from .views import InterviewCreateView,QuestionCreateView
 
 urlpatterns = [
-    path("",InterviewCreateView.as_view(),name="create-interview",)
+    path("",InterviewCreateView.as_view(),name="create-interview"),
+    path("<int:interview_id>/questions/",QuestionCreateView.as_view(),name="question_list"),
 ]
