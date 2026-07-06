@@ -45,7 +45,7 @@ class Interview(models.Model):
         default="pending",
     )
 
-    score = models.CharField(
+    score = models.IntegerField(
         null = True,
         blank=True,
     )
@@ -74,3 +74,22 @@ class Question(models.Model):
 
     def __str__(self):
         return f"Question {self.question_number} - {self.interview.user.username}"
+    
+# Answer model
+class Answer(models.Model):
+    question = models.ForeignKey(
+        Question,
+        on_delete=models.CASCADE,
+        related_name="answers"
+    )
+
+    answer_text = models.TextField()
+    audio_url = models.URLField(
+        blank = True,
+        null=True
+    )
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+    def __str__(self):
+        return f"Answer to Question {self.question.question_number}"

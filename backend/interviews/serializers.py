@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Interview,Question
+from .models import Interview,Question,Answer
 
 class InterviewSerializer(serializers.ModelSerializer):
     class Meta:
@@ -28,4 +28,21 @@ class QuestionSerializer(serializers.ModelSerializer):
         fields = [
             "question_number",
             "question_text",
+        ]
+
+# Answer serializer
+class AnswerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Answer
+        fields = [
+            "id",
+            "question",
+            "answer_text",
+            "audio_url",
+            "created_at",
+        ]
+
+        read_only_fields = [
+            "id",
+            "created_at",
         ]
